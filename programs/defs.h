@@ -44,7 +44,7 @@
 static char ptypenames[][15] = {"rb", "kway"};
 
 /* The text labels for ObjTypes */
-static char objtypenames[][15] = {"cut", "vol", "node"};
+static char objtypenames[][15] = {"cut", "vol", "node", "mobj"};
 
 /* The text labels for CTypes */
 static char ctypenames[][15] = {"rm", "shem"};

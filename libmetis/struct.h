@@ -26,6 +26,16 @@ typedef struct cnbr_t {
                              that are incident on pid */
 } cnbr_t;
 
+/*************************************************************************/
+/*! This data structure stores cut-based k-way refinement info about an
+    adjacent subdomain for a given vertex. */
+/*************************************************************************/
+//TODO: SETUP MultiCutBNR
+typedef struct mcnbr_t {
+  idx_t pid;            /*!< The partition ID */
+  idx_t ed;             /*!< The sum of the weights of the adjacent edges
+                             that are incident on pid */
+} mcnbr_t;
 
 /*************************************************************************/
 /*! The following data structure stores holds information on degrees for k-way
@@ -168,6 +178,9 @@ typedef struct ctrl_t {
   idx_t niter;                  /* The number of iterations during each refinement */
   idx_t numflag;                /* The user-supplied numflag for the graph */
   idx_t dropedges;              /* Indicates if edges will be randomly dropped during coarsening */
+  idx_t mobj_prio;              /* Priority ordering for multi-objective refinement */
+  idx_t mobj_ipart;             /* MOBJ initial partitioning mode (0=none, 1=reweight, 2=conorder) */
+  idx_t mobj_lex;               /* Lex FM: most-important obj first, later passes constrained (0=off) */
   idx_t *maxvwgt;		/* The maximum allowed weight for a vertex */
 
   idx_t ncon;                   /*!< The number of balancing constraints */

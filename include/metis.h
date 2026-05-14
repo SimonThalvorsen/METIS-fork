@@ -285,6 +285,10 @@ typedef enum {
   METIS_OPTION_TWOHOP,
   METIS_OPTION_FAST,
 
+  METIS_OPTION_MOBJPRIO,
+  METIS_OPTION_MOBJ_IPART,
+  METIS_OPTION_MOBJ_LEX,
+
   /* Used for command-line parameter purposes */
   METIS_OPTION_HELP,
   METIS_OPTION_TPWGTS,
@@ -352,8 +356,14 @@ typedef enum {
 typedef enum {
   METIS_OBJTYPE_CUT,
   METIS_OBJTYPE_VOL,
-  METIS_OBJTYPE_NODE
+  METIS_OBJTYPE_NODE,
+  METIS_OBJTYPE_MOBJ,
 } mobjtype_et;
+
+/*! MOBJ initial partitioning modes */
+#define METIS_MOBJ_IPART_NONE      0
+#define METIS_MOBJ_IPART_REWEIGHT  1
+#define METIS_MOBJ_IPART_CONORDER  2
 
 
 

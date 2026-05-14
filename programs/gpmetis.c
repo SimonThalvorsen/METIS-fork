@@ -13,6 +13,7 @@
  */
 
 #include "metisbin.h"
+#include <stdio.h>
 
 
 
@@ -88,6 +89,9 @@ int main(int argc, char *argv[])
   options[METIS_OPTION_NCUTS]     = params->ncuts;
   options[METIS_OPTION_UFACTOR]   = params->ufactor;
   options[METIS_OPTION_DBGLVL]    = params->dbglvl;
+  options[METIS_OPTION_MOBJPRIO]   = params->mobj_prio;
+  options[METIS_OPTION_MOBJ_IPART] = params->mobj_ipart;
+  options[METIS_OPTION_MOBJ_LEX]   = params->mobj_lex;
 
   gk_malloc_init();
   gk_startcputimer(params->parttimer);
@@ -101,9 +105,9 @@ int main(int argc, char *argv[])
       break;
 
     case METIS_PTYPE_KWAY:
-      status = METIS_PartGraphKway(&graph->nvtxs, &graph->ncon, graph->xadj, 
-                   graph->adjncy, graph->vwgt, graph->vsize, graph->adjwgt, 
-                   &params->nparts, params->tpwgts, params->ubvec, options, 
+      status = METIS_PartGraphKway(&graph->nvtxs, &graph->ncon, graph->xadj,
+                   graph->adjncy, graph->vwgt, graph->vsize, graph->adjwgt,
+                   &params->nparts, params->tpwgts, params->ubvec, options,
                    &objval, part);
       break;
 

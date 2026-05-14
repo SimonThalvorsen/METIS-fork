@@ -1,3 +1,6 @@
+# Compileroptions // CLANGD
+.cache/clangd
+.cache
 # Prerequisites
 *.d
 
@@ -60,3 +63,4 @@ graphs/*.npart.*
 GKlib
 .svn/
 
+compile_commands.json

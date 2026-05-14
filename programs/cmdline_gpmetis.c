@@ -45,6 +45,10 @@ static struct gk_option long_options[] = {
 
   {"dbglvl",         1,      0,      METIS_OPTION_DBGLVL},
 
+  {"mobj_prio",      1,      0,      METIS_OPTION_MOBJPRIO},
+  {"mobj_ipart",     1,      0,      METIS_OPTION_MOBJ_IPART},
+  {"mobj_lex",       1,      0,      METIS_OPTION_MOBJ_LEX},
+
   {"help",           0,      0,      METIS_OPTION_HELP},
   {0,                0,      0,      0}
 };
@@ -63,6 +67,7 @@ static gk_StringMap_t ptype_options[] = {
 static gk_StringMap_t objtype_options[] = {
  {"cut",                METIS_OBJTYPE_CUT},
  {"vol",                METIS_OBJTYPE_VOL},
+ {"mobj",               METIS_OBJTYPE_MOBJ},
  {NULL,                 0}
 };
 
@@ -82,6 +87,12 @@ static gk_StringMap_t iptype_options[] = {
 static gk_StringMap_t rtype_options[] = {
  {"fm",                METIS_RTYPE_FM},
  {"greedy",            METIS_RTYPE_GREEDY},
+ {NULL,                 0}
+};
+
+static gk_StringMap_t mobj_ipart_options[] = {
+ {"reweight",          METIS_MOBJ_IPART_REWEIGHT},
+ {"conorder",          METIS_MOBJ_IPART_CONORDER},
  {NULL,                 0}
 };
 
@@ -274,6 +285,10 @@ params_t *parse_cmdline(int argc, char *argv[])
   params->ubvecstr      = NULL;
   params->ubvec         = NULL;
 
+  params->mobj_prio     = 0;
+  params->mobj_ipart    = 0;
+  params->mobj_lex      = 0;
+
 
   gk_clearcputimer(params->iotimer);
   gk_clearcputimer(params->parttimer);
@@ -370,6 +385,20 @@ params_t *parse_cmdline(int argc, char *argv[])
         if (gk_optarg) params->dbglvl = (idx_t)atoi(gk_optarg);
         break;
 
+      case METIS_OPTION_MOBJPRIO:
+        if (gk_optarg) params->mobj_prio = (idx_t)strtoll(gk_optarg, NULL, 0);
+        break;
+
+      case METIS_OPTION_MOBJ_IPART:
+        if (gk_optarg)
+          if ((params->mobj_ipart = gk_GetStringID(mobj_ipart_options, gk_optarg)) == -1)
+            errexit("Invalid option -%s=%s\n", long_options[option_index].name, gk_optarg);
+        break;
+
+      case METIS_OPTION_MOBJ_LEX:
+        if (gk_optarg) params->mobj_lex = (idx_t)atoi(gk_optarg);
+        break;
+
       case METIS_OPTION_HELP:
         for (i=0; strlen(helpstr[i]) > 0; i++)
           printf("%s\n", helpstr[i]);
@@ -414,6 +443,8 @@ params_t *parse_cmdline(int argc, char *argv[])
     if (params->objtype == METIS_OBJTYPE_VOL)
       errexit("The -objtype=vol option cannot be specified with rb partitioning.\n");
   }
+  printf("OBJECTIVE_TYPE:%"PRIDX"\n", params->objtype);
+  // params->objtype = METIS_OBJTYPE_CUT;
 
   return params;
 }

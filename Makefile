@@ -1,6 +1,6 @@
 # Configuration options.
-i64        = not-set
-r64        = not-set
+i64        = 1
+r64        = 1
 gdb        = not-set
 assert     = not-set
 assert2    = not-set
@@ -18,8 +18,10 @@ gklib_path = ~/local
 
 BUILDDIR = build
 
-IDXWIDTH  = "\#define IDXTYPEWIDTH 32"
-REALWIDTH = "\#define REALTYPEWIDTH 32"
+# IDXWIDTH  = "\#define IDXTYPEWIDTH 32"
+IDXWIDTH  = "\#define IDXTYPEWIDTH 64"
+# REALWIDTH = "\#define REALTYPEWIDTH 32"
+REALWIDTH = "\#define REALTYPEWIDTH 64"
 
 # Process configuration options.
 CONFIG_FLAGS = -DCMAKE_VERBOSE_MAKEFILE=1

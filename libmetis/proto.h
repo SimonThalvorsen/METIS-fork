@@ -158,6 +158,8 @@ void Greedy_McKWayCutOptimize(ctrl_t *ctrl, graph_t *graph, idx_t niter,
          real_t ffactor, idx_t omode);
 void Greedy_McKWayVolOptimize(ctrl_t *ctrl, graph_t *graph, idx_t niter, 
          real_t ffactor, idx_t omode);
+void Greedy_MObjKWayCutOptimize(ctrl_t *ctrl, graph_t *graph, idx_t niter, 
+         real_t ffactor, idx_t omode);
 idx_t IsArticulationNode(idx_t i, idx_t *xadj, idx_t *adjncy, idx_t *where,
           idx_t *bfslvl, idx_t *bfsind, idx_t *bfsmrk);
 void KWayVolUpdate(ctrl_t *ctrl, graph_t *graph, idx_t v, idx_t from,

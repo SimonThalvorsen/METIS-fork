@@ -48,15 +48,18 @@ ctrl_t *SetupCtrl(moptype_et optype, idx_t *options, idx_t ncon, idx_t nparts,
 
 
     case METIS_OP_KMETIS:
-      ctrl->objtype = GETOPTION(options, METIS_OPTION_OBJTYPE, METIS_OBJTYPE_CUT);
-      ctrl->iptype  = GETOPTION(options, METIS_OPTION_IPTYPE,  METIS_IPTYPE_METISRB);
-      ctrl->rtype   = METIS_RTYPE_GREEDY;
-      ctrl->nIparts = GETOPTION(options, METIS_OPTION_NIPARTS, -1);
-      ctrl->ncuts   = GETOPTION(options, METIS_OPTION_NCUTS,   1);
-      ctrl->niter   = GETOPTION(options, METIS_OPTION_NITER,   10);
-      ctrl->ufactor = GETOPTION(options, METIS_OPTION_UFACTOR, KMETIS_DEFAULT_UFACTOR);
-      ctrl->minconn = GETOPTION(options, METIS_OPTION_MINCONN, 0);
-      ctrl->contig  = GETOPTION(options, METIS_OPTION_CONTIG,  0);
+      ctrl->objtype   = GETOPTION(options, METIS_OPTION_OBJTYPE, METIS_OBJTYPE_CUT);
+      ctrl->iptype    = GETOPTION(options, METIS_OPTION_IPTYPE,  METIS_IPTYPE_METISRB);
+      ctrl->rtype     = METIS_RTYPE_GREEDY;
+      ctrl->nIparts   = GETOPTION(options, METIS_OPTION_NIPARTS, -1);
+      ctrl->ncuts     = GETOPTION(options, METIS_OPTION_NCUTS,   1);
+      ctrl->niter     = GETOPTION(options, METIS_OPTION_NITER,   10);
+      ctrl->ufactor   = GETOPTION(options, METIS_OPTION_UFACTOR, KMETIS_DEFAULT_UFACTOR);
+      ctrl->minconn   = GETOPTION(options, METIS_OPTION_MINCONN, 0);
+      ctrl->contig    = GETOPTION(options, METIS_OPTION_CONTIG,  0);
+      ctrl->mobj_prio  = GETOPTION(options, METIS_OPTION_MOBJPRIO, 0);
+      ctrl->mobj_ipart = GETOPTION(options, METIS_OPTION_MOBJ_IPART, 0);
+      ctrl->mobj_lex   = GETOPTION(options, METIS_OPTION_MOBJ_LEX, 0);
       break;
 
 
@@ -371,7 +374,7 @@ int CheckParams(ctrl_t *ctrl)
       break;
 
     case METIS_OP_KMETIS:
-      if (ctrl->objtype != METIS_OBJTYPE_CUT && ctrl->objtype != METIS_OBJTYPE_VOL) {
+      if (ctrl->objtype != METIS_OBJTYPE_CUT && ctrl->objtype != METIS_OBJTYPE_VOL && ctrl->objtype != METIS_OBJTYPE_MOBJ) {
         IFSET(dbglvl, METIS_DBG_INFO, printf("Input Error: Incorrect objective type.\n"));
         return 0;
       }

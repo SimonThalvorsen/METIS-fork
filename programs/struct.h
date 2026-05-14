@@ -52,6 +52,10 @@ typedef struct {
   idx_t compress;
   idx_t ccorder;
 
+  idx_t mobj_prio;
+  idx_t mobj_ipart;
+  idx_t mobj_lex;
+
   char *filename;
   char *outfile;
   char *xyzfile;
